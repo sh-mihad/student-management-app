@@ -1,4 +1,4 @@
-import { Route, Router, Routes } from "react-router-dom"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Dashboard from "./components/Dashboard"
 import Roles from "./components/Roles"
 import Students from "./components/Students"
@@ -7,7 +7,7 @@ import Layout from "./layout"
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter >
       <Layout>
         <Routes>
           <Route path="/" element={<Dashboard/>} />
@@ -15,7 +15,7 @@ function App() {
           <Route path="/roles" element={<Roles/>} />
         </Routes>
       </Layout>
-    </Router>
+    </BrowserRouter >
   )
 }
 
