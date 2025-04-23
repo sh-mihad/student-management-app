@@ -3,6 +3,7 @@ import { useStudents } from "../../../context/studentContext/useStudentContex";
 
 const StudentTable = () => {
   const { students, deleteStudent } = useStudents();
+  console.log("students",students);
 
   return (
     <div className="overflow-x-auto rounded-xl border border-gray-200 shadow-sm">
