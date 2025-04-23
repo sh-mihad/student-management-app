@@ -5,6 +5,7 @@ import { DeleteIcon } from "../../../icons/DeleteIcon";
 import { EditIcon } from "../../../icons/EditIcon";
 import { ViewIcon } from "../../../icons/ViewIcon";
 import AddEditStudentForm from "./AddStudentForm";
+import ViewStudentDetails from "./ViewStudentDetails";
 
 
 const StudentTable = () => {
@@ -46,7 +47,7 @@ const StudentTable = () => {
               <td className="p-3">{student.gender}</td>
               <td className="p-3 text-center flex gap-2 justify-center items-center">
                 <button
-                  // onClick={() => deleteStudent(student.id)}
+                  onClick={() => setIsViewModal(student)}
                   className="block"
                 >
                 <ViewIcon/>
@@ -76,6 +77,14 @@ const StudentTable = () => {
           setIsEditModal(false)
           setSelectedStudent({})
         }}  />
+      </Modal>
+    }
+    {
+      isViewModalOpen  &&<Modal onClose={()=>{
+        setIsViewModal(false)
+        setSelectedStudent({})
+      }} modalTitle="View Student Details">
+        <ViewStudentDetails student={selectedStudent||{}}  />
       </Modal>
     }
   </div>
