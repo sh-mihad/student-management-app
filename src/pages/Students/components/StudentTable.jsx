@@ -47,7 +47,10 @@ const StudentTable = () => {
               <td className="p-3">{student.gender}</td>
               <td className="p-3 text-center flex gap-2 justify-center items-center">
                 <button
-                  onClick={() => setIsViewModal(student)}
+                  onClick={() => {
+                    setIsViewModal(student)
+                    setSelectedStudent(student)
+                  }}
                   className="block"
                 >
                 <ViewIcon/>
@@ -80,7 +83,7 @@ const StudentTable = () => {
       </Modal>
     }
     {
-      isViewModalOpen  &&<Modal onClose={()=>{
+      (isViewModalOpen&&selectedStudent)  &&<Modal onClose={()=>{
         setIsViewModal(false)
         setSelectedStudent({})
       }} modalTitle="View Student Details">
