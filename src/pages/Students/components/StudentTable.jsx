@@ -1,12 +1,17 @@
+import { useState } from "react";
+import Modal from "../../../components/Modal";
 import { useStudents } from "../../../context/studentContext/useStudentContex";
 import { DeleteIcon } from "../../../icons/DeleteIcon";
 import { EditIcon } from "../../../icons/EditIcon";
 import { ViewIcon } from "../../../icons/ViewIcon";
+import AddEditStudentForm from "./AddStudentForm";
 
 
 const StudentTable = () => {
-  const { students, deleteStudent } = useStudents();
-  console.log("students",students);
+  const { students, deleteStudent,updateStudent } = useStudents();
+  const [isViewModalOpen,setIsViewModal] =useState(false)
+  const [isEditModalOpen,setIsEditModal] =useState(false)
+  const [selectedStudent,setSelectedStudent] = useState({})
 
   return (
     <div className="overflow-x-auto rounded-xl border border-gray-200 shadow-sm">
@@ -47,7 +52,10 @@ const StudentTable = () => {
                 <ViewIcon/>
                 </button>
                 <button
-                  // onClick={() => deleteStudent(student.id)}
+                  onClick={() => {
+                    setSelectedStudent(student)
+                    setIsEditModal(true)
+                  }}
                 >
                   <EditIcon/>
                 </button>
@@ -62,6 +70,14 @@ const StudentTable = () => {
         )}
       </tbody>
     </table>
+    {
+      (isEditModalOpen && selectedStudent) &&<Modal onClose={()=>setIsEditModal(false)} modalTitle="Edit Student">
+        <AddEditStudentForm studentInfo={selectedStudent||{}} onSubmit={updateStudent} onClose={()=>{
+          setIsEditModal(false)
+          setSelectedStudent({})
+        }}  />
+      </Modal>
+    }
   </div>
   );
 };

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const AddEditStudentForm = ({ onSubmit, onClose, isEditMode = false,
+const AddEditStudentForm = ({ onSubmit, onClose,
     studentInfo = null, }) => {
     const [formData, setFormData] = useState({
         name: "",
@@ -10,7 +10,7 @@ const AddEditStudentForm = ({ onSubmit, onClose, isEditMode = false,
     });
 
     useEffect(() => {
-        if (isEditMode && studentInfo) {
+        if ( studentInfo) {
             setFormData({
                 name: studentInfo.name || "",
                 email: studentInfo.email || "",
@@ -18,7 +18,7 @@ const AddEditStudentForm = ({ onSubmit, onClose, isEditMode = false,
                 gender: studentInfo.gender || "Male",
             });
         }
-    }, [isEditMode, studentInfo]);
+    }, [ studentInfo]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -29,7 +29,7 @@ const AddEditStudentForm = ({ onSubmit, onClose, isEditMode = false,
         e.preventDefault();
         if (formData.name && formData.email && formData.class) {
             const payload = { ...formData };
-            if (isEditMode && studentInfo?.id) {
+            if ( studentInfo?.id) {
                 payload.id = studentInfo.id; // Add ID for update identification
             }
             onSubmit(payload);
@@ -116,7 +116,7 @@ const AddEditStudentForm = ({ onSubmit, onClose, isEditMode = false,
                     type="submit"
                     className="text-sm px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
                 >
-                    {isEditMode ? "Update Student" : "Add Student"}
+                    {studentInfo ? "Update Student" : "Add Student"}
                 </button>
             </div>
         </form>
