@@ -1,4 +1,7 @@
 import { useStudents } from "../../../context/studentContext/useStudentContex";
+import { DeleteIcon } from "../../../icons/DeleteIcon";
+import { EditIcon } from "../../../icons/EditIcon";
+import { ViewIcon } from "../../../icons/ViewIcon";
 
 
 const StudentTable = () => {
@@ -36,12 +39,22 @@ const StudentTable = () => {
               <td className="p-3">{student.email}</td>
               <td className="p-3">{student.class}</td>
               <td className="p-3">{student.gender}</td>
-              <td className="p-3 text-center">
+              <td className="p-3 text-center flex gap-2 justify-center items-center">
+                <button
+                  // onClick={() => deleteStudent(student.id)}
+                  className="block"
+                >
+                <ViewIcon/>
+                </button>
+                <button
+                  // onClick={() => deleteStudent(student.id)}
+                >
+                  <EditIcon/>
+                </button>
                 <button
                   onClick={() => deleteStudent(student.id)}
-                  className="text-red-600 hover:text-red-800 font-semibold transition"
                 >
-                  Delete
+                  <DeleteIcon/>
                 </button>
               </td>
             </tr>
